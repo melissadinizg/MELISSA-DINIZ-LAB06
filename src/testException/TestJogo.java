@@ -16,7 +16,7 @@ public class TestJogo {
 		 * @throws Exception
 		 */
 		public static void testaNomeJogo(String nome) throws Exception {
-			if (nome == null || nome.trim().equals("")) {
+			if (nome == null || nome.trim().isEmpty()) {
 				throw new Exception("Nome do jogo nao pode ser vazio ou nulo.");
 			}
 		}

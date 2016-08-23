@@ -15,8 +15,13 @@ import jogo.RPG;
  *
  */
 public class TesteJogo {
+	//declaracao das variaveis
 	private Jogo jogo1, jogo2, jogo3, jogo4;
 	
+	/**
+	 * Cria os jogos de diversos tipos
+	 * @throws Exception
+	 */
 	 @Before
 	    public void criaJogos() throws Exception {
 	        jogo1 = new RPG("Kingdom Hearts", 15.0);
@@ -26,8 +31,35 @@ public class TesteJogo {
 	        
 	    }
 	 
-	    
-	    
+ /*
+   @Test
+    public void registraJogadaTest() throws Exception{
+	   jogo1.registraJogada(650, false);
+       jogo2.registraJogada(750, false);
+       jogo3.registraJogada(850, false);
+       jogo3.registraJogada(950, false);
+        
+        assertNotEquals(true, jogo1.isZerou());
+        assertEquals(750, jogo2.getMaiorScore());
+        assertEquals(false, jogo1.isZerou());
+        assertNotEquals(940, jogo2.getMaiorScore());
+        
+        try{
+            jogo3.registraJogada(-15, true);
+            fail("Deveria ter lancado excecao de score");
+        } catch(Exception e){
+            assertEquals("Score nao pode ser menor ou igual a zero.",e.getMessage());
+        }
+        
+        try{
+            jogo4.registraJogada(0, true);
+            fail("Deveria ter lancado excecao de score");
+        } catch(Exception e){
+            assertEquals("Score nao pode ser menor ou igual a zero.",e.getMessage());
+        }
+    }
+
+	    */
 	    @Test
 	    public void testRegistraJogada() throws Exception {
 	    	//jogo1.registraJogada(10000, false);
@@ -48,7 +80,9 @@ public class TesteJogo {
 	        
 	    }
 	    
-	
+	/**
+	 * faz o tratamento das excecoes
+	 */
 	@Test
 	public void testJogos(){
 		assertEquals("Kingdom Hearts",jogo1.getNome());

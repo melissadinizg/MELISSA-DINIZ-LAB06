@@ -77,6 +77,7 @@ public abstract class Jogo {
 	 */
 	@Override
 	public String toString() {
+		//String que armazena as informacoes
 		StringBuilder retorno = new StringBuilder();
 		
 		retorno.append("+ " + this.getNome() + " - " + this.getClass().getSimpleName() + ":\n");
@@ -160,7 +161,7 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * 
+	 * Altera a quantidade de vezes jogadas
 	 * @param vezesZeradas
 	 */
 	public void setVezesZeradas(int vezesZeradas) {
@@ -168,23 +169,15 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * 
+	 * O booleano zerou
 	 * @return
 	 */
 	public boolean isZerou() {
 		return zerou;
 	}
-
+	
 	/**
-	 * 
-	 * @param zerou
-	 */
-	public void setZerou(boolean zerou) {
-		this.zerou = zerou;
-	}
-
-	/**
-	 * 
+	 * Recupera a jogabilidade
 	 * @return
 	 */
 	public Jogabilidade getTipo() {
@@ -192,7 +185,7 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * 
+	 * Altera a jogabilidade
 	 * @param tipo
 	 */
 	public void setTipo(Jogabilidade tipo) {

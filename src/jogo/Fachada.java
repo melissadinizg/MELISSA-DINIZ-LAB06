@@ -27,12 +27,13 @@ public class Fachada {
 	 * @return
 	 * @throws Exception
 	 */
+	
 	public boolean upgrade(String login) throws Exception {
 
 		Usuario user = retornaUser(login);
 
-		// se for null eh pq nao existe usuario com o login dado
-		if (user != null && user.getX2p() >= 1000) {
+		//se for true o user ja existe na lista com o login dado
+		if (buscaUserLogin(login) && user.getX2p() >= 1000) {
 			// verifica se eh veterano
 			if (user.getClass() != Veterano.class) {
 
@@ -53,6 +54,24 @@ public class Fachada {
 		return false;
 	}
 
+	
+	/**
+	 * Retorna o usuario com um login passado
+	 * 
+	 * @param login
+	 * @return Usuarou/null
+	 */
+	private Usuario retornaUser(String login) {
+		for (Usuario usuario : loja) {
+			if (usuario.getLogin().equalsIgnoreCase(login)) {
+				//se o usuario estiver na lista retorna o proprio usuario
+				return usuario;
+			}
+		}
+		//ou retorna null se nao existir o usuario
+		return null;
+	}
+
 	/**
 	 * Adiciona o usuario a lista se ele ainda nao for cadastrado
 	 * 
@@ -60,7 +79,7 @@ public class Fachada {
 	 * @return boolean
 	 */
 	public boolean addUsuario(Usuario user) {
-		//se o usuario
+		//se o usuario existir na lista ele retorna true
 		if (! loja.contains(user)) {
 			loja.add(user);
 			return true;
@@ -92,39 +111,27 @@ public class Fachada {
 	 * @throws Exception
 	 */
 	public void vendeJogo(Jogo jogo) throws Exception {
+		//faz a venda do jogo
 		if (jogo != null) {
 			user.compraJogos(jogo);
 		} else {
 			throw new Exception("O jogo nao pode ser nulo.");
 		}
-
 	}
 
 
-	/**
-	 * Retorna o usuario com um login passado
-	 * 
-	 * @param login
-	 * @return Usuarou/null
-	 */
-	private Usuario retornaUser(String login) {
-		for (Usuario usuario : loja) {
-			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				return usuario;
-			}
-		}
-		return null;
-	}
+
 
 	/**
-	 * procura o usuario na loja atraves do login
+	 * Busca o usuario na loja atraves do login
 	 * 
 	 * @param login
 	 * @return boolean
 	 * @throws Exception
 	 */
 	private boolean buscaUserLogin(String login) {
-
+		//retorna true se existir o usuario
+		//com esse login
 		for (Usuario usuario : loja) {
 			if (usuario.getLogin().equalsIgnoreCase(login)) {
 				return true;
@@ -134,8 +141,8 @@ public class Fachada {
 	}
 
 	/**
-	 * Retorna o objeto como string
-	 * 
+	 * Sobreescrita do metodo toString 
+	 * retorna o objeto como string
 	 */
 	@Override
 	public String toString() {
@@ -155,8 +162,8 @@ public class Fachada {
 				retorno.append(usuario.toString());
 
 			}
-			
-			retorno.append("Total de preço dos jogos: R$ " + precoTotal + "\n");
+			//armazena na string o total de preco dos jogos
+			retorno.append("\nTotal de preço dos jogos: R$ " + precoTotal + "\n");
 			retorno.append("\n--------------------------------------------");
 
 		}

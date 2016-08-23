@@ -18,7 +18,7 @@ import jogo.Jogo;
 import testException.TestUsuario;
 
 /**
- * @author melissadg
+ * @author Melissa Diniz - 115211394
  *
  */
 public abstract class Usuario {
@@ -36,6 +36,7 @@ public abstract class Usuario {
 	 * @throws Exception
 	 */
 	public Usuario(String nomeUsuario, String login, double dinheiro) throws Exception {
+		//faz o teste de excecoes
 		TestUsuario.testaNomeUsuario(nomeUsuario);
 		TestUsuario.testaLogin(login);
 		TestUsuario.testaDinheiro(dinheiro);
@@ -61,7 +62,7 @@ public abstract class Usuario {
 		
 		if (!existeJogo(jogoRecebido)) {
 			//atualiza o x2p aplicando o bonus da compra
-			this.setX2p(preco * bonusX2p());
+			this.setX2p(calculaX2p(jogoRecebido));
 			return listaJogos.add(jogoRecebido);
 		}
 		//ou exception de jogo ja comprado
@@ -132,15 +133,10 @@ public abstract class Usuario {
 		}
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return this.getLogin() +"\n" + this.getNomeUsuario() + " - " + "Jogador" + this.getClass().getSimpleName() + "\n"; 
 	}
-
-
-
 
 	/**
 	 * @return the nomeUsuario

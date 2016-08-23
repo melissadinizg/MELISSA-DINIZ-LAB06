@@ -18,7 +18,7 @@ public class TestUsuario {
 	 * @throws Exception
 	 */
 	public static void testaNomeUsuario(String nome) throws Exception {
-		if (nome == null || nome.trim().equals("")) {
+		if (nome == null || nome.trim().isEmpty()) {
 			throw new Exception("Nome do usuario nao pode ser vazio ou nulo.");
 		}
 	}
@@ -42,7 +42,7 @@ public class TestUsuario {
 	 * @throws Exception
 	 */
 	public static void testaLogin(String login) throws Exception {
-		if (login == null || login.trim().equals("")) {
+		if (login == null || login.trim().isEmpty()) {
 			throw new Exception("Login do usuario nao pode ser vazio ou nulo.");
 		}
 	}
