@@ -22,11 +22,16 @@ public class TestFachada {
 	private Usuario user1, user2, user3;
 	
 	@Before
+<<<<<<< HEAD
     public void criaUsuario() throws Exception {
+=======
+    public void criaJogos() throws Exception {
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
         user1 = new Noob("Melissa", "mel123", 50.0);
         user2 = new Veterano("Luan", "lulu", 1000.0);
     }
 	
+<<<<<<< HEAD
 	/**
 	 * Faz o teste da adicao de usuarios na lista de usuarios
 	 * @throws Exception
@@ -51,10 +56,23 @@ public class TestFachada {
 	public void testUpgrade() throws Exception{
 		user3 = new Noob("Noobinho", "souNoob", 1.0);
 	
+=======
+	@Test
+	public void testAdicionaUsuario(){
+		assertEquals(true, loja.addUsuario(user1));
+		assertEquals(false, loja.addUsuario(user1));
+		
+		
+	}
+	@Test
+	public void testUpgrade() throws Exception{
+		user3 = new Noob("Noobinho", "souNoob", 1.0);
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
 		user3.setX2p(1100);
 		loja.addUsuario(user3);
 		
 		assertEquals(1100, user3.getX2p());
+<<<<<<< HEAD
 		loja.upgrade("souNoob");
 		
 		//nao ta fazendo o cast
@@ -63,4 +81,10 @@ public class TestFachada {
 
 	}
 	
+=======
+		assertEquals(true, loja.upgrade("souNoob"));
+	}
+	
+	
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
 }

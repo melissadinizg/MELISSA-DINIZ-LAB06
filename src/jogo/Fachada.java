@@ -28,6 +28,7 @@ public class Fachada {
 	 * @throws Exception
 	 */
 	
+<<<<<<< HEAD
 	public void upgrade(String login) throws Exception {
 		Usuario user;
 		if (buscaUserLogin(login)) {
@@ -41,6 +42,22 @@ public class Fachada {
 				String nomeUser = user.getNomeUsuario();
 				String loginUser = user.getLogin();
 				double dinheiro = user.getDinheiro();
+=======
+	public boolean upgrade(String login) throws Exception {
+
+		Usuario user = retornaUser(login);
+
+		//se for true o user ja existe na lista com o login dado
+		if (buscaUserLogin(login) && user.getX2p() >= 1000) {
+			// verifica se eh veterano
+			if (user.getClass() != Veterano.class) {
+
+				// pegando os dados do usuario noob
+				int x2pNovo = this.user.getX2p();
+				String nomeUser = this.user.getNomeUsuario();
+				String loginUser = this.user.getLogin();
+				double dinheiro = this.user.getDinheiro();
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
 
 				this.user = new Veterano(nomeUser, loginUser, dinheiro);
 				this.user.setX2p(x2pNovo);
@@ -88,12 +105,34 @@ public class Fachada {
 		return user;
 	}
 
+	
+	/**
+	 * Retorna o usuario com um login passado
+	 * 
+	 * @param login
+	 * @return Usuarou/null
+	 */
+	private Usuario retornaUser(String login) {
+		for (Usuario usuario : loja) {
+			if (usuario.getLogin().equalsIgnoreCase(login)) {
+				//se o usuario estiver na lista retorna o proprio usuario
+				return usuario;
+			}
+		}
+		//ou retorna null se nao existir o usuario
+		return null;
+	}
+
 	/**
 	 * Adiciona o usuario a lista se ele ainda nao for cadastrado
 	 * @param user
 	 * @return boolean
 	 */
+<<<<<<< HEAD
 	public boolean addUsuario(Usuario user) throws Exception{
+=======
+	public boolean addUsuario(Usuario user) {
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
 		//se o usuario existir na lista ele retorna true
 		if (! loja.contains(user)) {
 			loja.add(user);
@@ -138,7 +177,29 @@ public class Fachada {
 	}
 
 
+<<<<<<< HEAD
 
+=======
+
+
+	/**
+	 * Busca o usuario na loja atraves do login
+	 * 
+	 * @param login
+	 * @return boolean
+	 * @throws Exception
+	 */
+	private boolean buscaUserLogin(String login) {
+		//retorna true se existir o usuario
+		//com esse login
+		for (Usuario usuario : loja) {
+			if (usuario.getLogin().equalsIgnoreCase(login)) {
+				return true;
+			}
+		}
+		return false;
+	}
+>>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
 
 	/**
 	 * Sobreescrita do metodo toString 
