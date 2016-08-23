@@ -27,46 +27,83 @@ public class Fachada {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean upgrade(String login) throws Exception {
-
-		Usuario user = retornaUser(login);
-
-		// se for null eh pq nao existe usuario com o login dado
-		if (user != null && user.getX2p() >= 1000) {
-			// verifica se eh veterano
-			if (user.getClass() != Veterano.class) {
-
-				// pegando os dados do usuario noob
-				int x2pNovo = this.user.getX2p();
-				String nomeUser = this.user.getNomeUsuario();
-				String loginUser = this.user.getLogin();
-				double dinheiro = this.user.getDinheiro();
+	
+	public void upgrade(String login) throws Exception {
+		Usuario user;
+		if (buscaUserLogin(login)) {
+			
+			user = retornaUser(login);
+			
+ 			if ((user.getX2p() >= 1000) && (user.getClass() != Veterano.class)){
+ 				
+ 			// pegando os dados do usuario noob
+				int x2pNovo = user.getX2p();
+				String nomeUser = user.getNomeUsuario();
+				String loginUser = user.getLogin();
+				double dinheiro = user.getDinheiro();
 
 				this.user = new Veterano(nomeUser, loginUser, dinheiro);
 				this.user.setX2p(x2pNovo);
-				return true;
-
 			}
-		} else {
-			throw new Exception("Nao foi possivel upar usuario.");
+		}else{
+			throw new Exception("Usuario nao esta na lista de usuarios.");
+		}
+
+	}
+	
+	/**
+	 * Busca o usuario na loja atraves do login
+	 * 
+	 * @param login
+	 * @return boolean
+	 * @throws Exception
+	 */
+	private boolean buscaUserLogin(String login) {
+		//retorna true se existir o usuario
+		//com esse login
+		for (Usuario usuario : loja) {
+			if (usuario.getLogin().equalsIgnoreCase(login)) {
+				return true;
+			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Retorna o usuario com um login passado
+	 * 
+	 * @param login
+	 * @return Usuarou/null
+	 */
+	private Usuario retornaUser(String login) {
+		Usuario user = null;
+		
+		for (Usuario usuario : loja) {
+			if (usuario.getLogin().equalsIgnoreCase(login)) {
+				//se o usuario estiver na lista retorna o proprio usuario
+				user = usuario;
+			}
+		}
+		//ou retorna null se nao existir o usuario
+		return user;
 	}
 
 	/**
 	 * Adiciona o usuario a lista se ele ainda nao for cadastrado
-	 * 
 	 * @param user
 	 * @return boolean
 	 */
-	public boolean addUsuario(Usuario user) {
-		//se o usuario
+	public boolean addUsuario(Usuario user) throws Exception{
+		//se o usuario existir na lista ele retorna true
 		if (! loja.contains(user)) {
 			loja.add(user);
 			return true;
+		}else{
+			throw new Exception("Usuario ja esta na lista de usuarios.");
 		}
-		return false;
 	}
+
+
 
 	/**
 	 * Adiciona dinheiro na conta do usuario usando o login passado no parametro
@@ -92,50 +129,20 @@ public class Fachada {
 	 * @throws Exception
 	 */
 	public void vendeJogo(Jogo jogo) throws Exception {
+		//faz a venda do jogo
 		if (jogo != null) {
 			user.compraJogos(jogo);
 		} else {
 			throw new Exception("O jogo nao pode ser nulo.");
 		}
-
 	}
 
 
-	/**
-	 * Retorna o usuario com um login passado
-	 * 
-	 * @param login
-	 * @return Usuarou/null
-	 */
-	private Usuario retornaUser(String login) {
-		for (Usuario usuario : loja) {
-			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				return usuario;
-			}
-		}
-		return null;
-	}
+
 
 	/**
-	 * procura o usuario na loja atraves do login
-	 * 
-	 * @param login
-	 * @return boolean
-	 * @throws Exception
-	 */
-	private boolean buscaUserLogin(String login) {
-
-		for (Usuario usuario : loja) {
-			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Retorna o objeto como string
-	 * 
+	 * Sobreescrita do metodo toString 
+	 * retorna o objeto como string
 	 */
 	@Override
 	public String toString() {
@@ -155,12 +162,26 @@ public class Fachada {
 				retorno.append(usuario.toString());
 
 			}
-			
-			retorno.append("Total de preço dos jogos: R$ " + precoTotal + "\n");
+			//armazena na string o total de preco dos jogos
+			retorno.append("\nTotal de preço dos jogos: R$ " + precoTotal + "\n");
 			retorno.append("\n--------------------------------------------");
 
 		}
 		//retorna a toString retorno com todos as string adicionada
 		return retorno.toString();
+	}
+	
+	/**
+	 * @return the loja
+	 */
+	public ArrayList<Usuario> getLoja() {
+		return loja;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public Usuario getUser() {
+		return user;
 	}
 }
