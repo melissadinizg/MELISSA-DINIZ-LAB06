@@ -56,7 +56,12 @@ public abstract class Usuario {
 	 * @return
 	 */
 	public boolean compraJogos(Jogo jogoRecebido) {
+		//pega o preco do jogo e faz cast pra int
+		int preco = (int)jogoRecebido.getPreco();
+		
 		if (!existeJogo(jogoRecebido)) {
+			//atualiza o x2p aplicando o bonus da compra
+			this.setX2p(preco * bonusX2p());
 			return listaJogos.add(jogoRecebido);
 		}
 		//ou exception de jogo ja comprado
@@ -96,8 +101,12 @@ public abstract class Usuario {
 	 * @param zerou
 	 * @throws Exception 
 	 */
-	public void registraJogada(Jogo nomeDoJogo, int score, boolean zerou) throws Exception{
-		nomeDoJogo.registraJogada(score, zerou);
+	public int registraJogada(Jogo nomeDoJogo, int score, boolean zerou) throws Exception{
+		//pega o bonus calculado em jogo
+		int bonus = nomeDoJogo.registraJogada(score, zerou);
+		//atualiza o valor do x2p do usuario
+		this.setX2p(this.getX2p() + bonus);
+		return this.getX2p();
 	}
 	
 	/**

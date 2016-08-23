@@ -4,10 +4,11 @@
 package jogo;
 
 /**
- * @author melissadg
+ * @author Melissa Diniz - 115211394
  *
  */
 public class Luta extends Jogo{
+	private int BONUS;
 
 	/**
 	 * Construtor do jogo tipo luta
@@ -16,6 +17,7 @@ public class Luta extends Jogo{
 	 * @throws Exception
 	 */
 	public Luta(String nome, double preco) throws Exception {
+		//nome e preco testados na superclasse
 		super(nome, preco);
 	}
 
@@ -25,8 +27,8 @@ public class Luta extends Jogo{
 	 */
 	@Override
 	int bonusX2p() {
-		int bonus = super.getMaiorScore() / 1000;
-		return bonus;
+		BONUS = super.getMaiorScore() / 1000;
+		return BONUS;
 	}
 	
 	

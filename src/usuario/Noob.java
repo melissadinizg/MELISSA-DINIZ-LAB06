@@ -11,7 +11,8 @@ import jogo.Jogo;
  */
 public class Noob extends Usuario {
 	private double DESCONTO_NOOB = 0.1;
-
+	private int BONUS = 10;
+	
 	public Noob(String nomeUsuario, String login, double dinheiro) throws Exception {
 		super(nomeUsuario, login, dinheiro);
 		super.setX2p(0);
@@ -34,7 +35,7 @@ public class Noob extends Usuario {
 	 * Sobreescrita do metodo calculaX2p aplicando o desconto no valor do preco
 	 */
 	public int bonusX2p() {
-		return 10;
+		return BONUS;
 
 	}
 }

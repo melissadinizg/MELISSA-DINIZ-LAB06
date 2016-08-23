@@ -3,51 +3,47 @@ package testes;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
 import org.junit.Before;
-
 import jogo.Jogo;
 import jogo.Luta;
 import jogo.Plataforma;
 import jogo.RPG;
-import usuario.Noob;
-import usuario.Usuario;
+
 
 /**
  * @author Melissa
  *
  */
 public class TesteJogo {
-	private Jogo jogo1, jogo2, jogo3, jogo9;
+	private Jogo jogo1, jogo2, jogo3, jogo4;
 	
 	 @Before
 	    public void criaJogos() throws Exception {
 	        jogo1 = new RPG("Kingdom Hearts", 15.0);
 	        jogo2 = new Luta("Street Fighter", 35.0);
 	        jogo3 = new Plataforma("Sonic", 40.0);
-	        jogo9 = new RPG("Legend of zelda", 75.0);
+	        jogo4 = new RPG("Legend of zelda", 75.0);
 	        
 	    }
 	 
 	    
 	    
 	    @Test
-	    public void testRegistraJogada() {
-	    	
+	    public void testRegistraJogada() throws Exception {
 	    	//jogo1.registraJogada(10000, false);
 	    	
-	    	assertEquals(0, jogo1.getVezesZeradas());
+	    	//assertEquals(0, jogo1.getVezesZeradas());
 	       // assertEquals(0, jogo1.getVezesZeradas());
 	       // assertNotEquals(2, jogo1.getVezesZeradas());
 	        //assertEquals(80000, jogo2.getMaiorScore());
 	        //assertEquals(1, jogo3.getVezesJogadas());
 	        
-	        
+	        //testa no score negativo
 	        try {
-	            jogo9.registraJogada(-15, true);
+	            jogo4.registraJogada(-15, true);
 	            fail("Deveria ter lancado excecao de score");
 	        } catch (Exception e) {
-	            assertEquals("Score não pode ser menor que 0.", e.getMessage());
+	            assertEquals("Score nao pode ser menor que 0.", e.getMessage());
 	        }
 	        
 	    }
@@ -60,7 +56,7 @@ public class TesteJogo {
         assertEquals("Sonic", jogo3.getNome());
         assertEquals("Plataforma", jogo3.getClass().getSimpleName());
         assertEquals("Luta", jogo2.getClass().getSimpleName());
-        assertEquals("RPG", jogo9.getClass().getSimpleName());
+        assertEquals("RPG", jogo4.getClass().getSimpleName());
         
 		//testa nome vazio
 		try {

@@ -34,14 +34,14 @@ public class TestJogo {
 		}
 		
 		/**
-		 * Metodo que testa a validade do preco do jogo
+		 * Metodo que testa a validade do score
 		 * 
 		 * @param nome
 		 * @throws Exception
 		 */
 		public static void testaScore(int score) throws Exception {
 			if (score < 0) {
-				throw new Exception("Score não pode ser menor que 0.");
+				throw new Exception("Score nao pode ser menor que 0.");
 			}
 		}
 }

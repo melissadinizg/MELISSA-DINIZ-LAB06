@@ -1,10 +1,11 @@
 package jogo;
 
 /**
- * @author melissadg
+ * @author Melissa Diniz - 115211394
  *
  */
 public class Plataforma extends Jogo {
+	private int BONUS;
 	
 	/**
 	 * Construtor do jogo tipo Plataforma
@@ -13,6 +14,8 @@ public class Plataforma extends Jogo {
 	 * @throws Exception
 	 */
 	public Plataforma(String nome, double preco) throws Exception {
+		//nome e preco testados na superclasse
+
 		super(nome, preco);
 	}
 
@@ -22,7 +25,8 @@ public class Plataforma extends Jogo {
 	 */
 	@Override
 	int bonusX2p() {
-		return super.getVezesZeradas() * 20;
+		BONUS = super.getVezesZeradas() * 20; 
+		return BONUS;
 	}
 
 }

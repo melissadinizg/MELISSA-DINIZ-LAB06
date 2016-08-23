@@ -11,12 +11,11 @@ import usuario.Usuario;
  *
  */
 public abstract class Jogo {
-
+	//atributos do jogo
 	private String nome;
 	private double preco;
 	private int maiorScore, vezesJogadas, vezesZeradas;
 	private boolean zerou;
-	private Usuario usuario;
 	private Jogabilidade tipo;
 	
 	/**
@@ -26,7 +25,9 @@ public abstract class Jogo {
 	 * @throws Exception 
 	 */
 	public Jogo(String nome, double preco) throws Exception{
+		//testa nome valido
 		TestJogo.testaNomeJogo(nome);
+		//testa o preco do jogo valido
 		TestJogo.testaPrecoJogo(preco);
 		
 		this.nome = nome;
@@ -44,29 +45,36 @@ public abstract class Jogo {
 	 * @param zerou
 	 */
 	public int registraJogada(int score, boolean zerou) throws Exception{
+			//testa se o score eh valido
 			TestJogo.testaScore(score);
 			
+			//verifica se o score recebido eh maior que o atual
 			if(maiorScore < score){
-				maiorScore = score;
+				this.maiorScore = score;
 				
+			//atualiza as vezes zeradas
 			}if(zerou == true){
-				vezesZeradas ++;
+				this.vezesZeradas ++;
 			}
 			
-			int x2pAtual = this.usuario.getX2p();
-			usuario.setX2p(x2pAtual + bonusX2p());
-		
-		
-			return usuario.getX2p();
+			//atualiza o valor de vezes jogadas
+			this.setVezesJogadas(this.getVezesJogadas() + 1);
+			
+			//recupera o x2p atual e aplica o bonus do tipo de jogo
+			int x2pBonus = bonusX2p();
+			return x2pBonus;
 	}
 
 	/**
 	 * metodo abstrato que sera utilizado para aplicar
 	 * o bonus 
-	 * @return
+	 * @return int bonus
 	 */
 	abstract int bonusX2p();
 
+	/**
+	 * toString da classe jogo
+	 */
 	@Override
 	public String toString() {
 		StringBuilder retorno = new StringBuilder();
@@ -144,7 +152,7 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * 
+	 * Pega a quantidade de vezes jogadas
 	 * @return
 	 */
 	public int getVezesZeradas() {

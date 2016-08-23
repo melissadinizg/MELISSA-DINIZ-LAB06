@@ -11,6 +11,7 @@ import jogo.Jogo;
  */
 public class Veterano extends Usuario {
 	private double DESCONTO_VETERANO = 0.3;
+	private int BONUS = 15;
 
 	public Veterano(String nomeUsuario, String login, double dinheiro) throws Exception {
 		super(nomeUsuario, login, dinheiro);
@@ -37,7 +38,7 @@ public class Veterano extends Usuario {
 	 */
 	@Override
 	public int bonusX2p() {
-		return 15;
+		return BONUS;
 	}
 
 }
