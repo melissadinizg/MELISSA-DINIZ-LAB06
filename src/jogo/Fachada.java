@@ -15,7 +15,6 @@ import usuario.Veterano;
 public class Fachada {
 	private ArrayList<Usuario> loja;
 	private Usuario user;
-	private Jogo j;
 
 	public Fachada() {
 		loja = new ArrayList<>();

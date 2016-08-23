@@ -43,17 +43,21 @@ public abstract class Jogo {
 	 * @param score
 	 * @param zerou
 	 */
-	public int registraJogada(int score, boolean zerou){
-		if(maiorScore < score){
-			maiorScore = score;
+	public int registraJogada(int score, boolean zerou) throws Exception{
+			TestJogo.testaScore(score);
 			
-		}if(zerou == true){
-			vezesZeradas ++;
-		}
+			if(maiorScore < score){
+				maiorScore = score;
+				
+			}if(zerou == true){
+				vezesZeradas ++;
+			}
+			
+			int x2pAtual = this.usuario.getX2p();
+			usuario.setX2p(x2pAtual + bonusX2p());
 		
-		int x2pAtual = usuario.getX2p();
-		usuario.setX2p(x2pAtual + bonusX2p());
-		return usuario.getX2p();
+		
+			return usuario.getX2p();
 	}
 
 	/**

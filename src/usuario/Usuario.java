@@ -94,8 +94,9 @@ public abstract class Usuario {
 	 * @param nomeDoJogo
 	 * @param score
 	 * @param zerou
+	 * @throws Exception 
 	 */
-	void registraJogada(Jogo nomeDoJogo, int score, boolean zerou){
+	public void registraJogada(Jogo nomeDoJogo, int score, boolean zerou) throws Exception{
 		nomeDoJogo.registraJogada(score, zerou);
 	}
 	

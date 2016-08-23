@@ -27,7 +27,7 @@ public class TesteUsuario {
 	public void criaUsuario() throws Exception {
 		maria = new Noob("Maria", "maria123", 500.0);
 		joao = new Veterano("Joao", "j123", 10.0);
-		kleber = new Noob("Kleber", "klebinho", 150);
+		kleber = new Noob("Kleber", "klebinho", 150.0);
 		jogo1 = new RPG("Jogo1", 1.0); 
 		jogo2 = new RPG("Jogo2", 1.0);
 	}
@@ -38,6 +38,13 @@ public class TesteUsuario {
 		maria.compraJogos(jogo1); //10
 		joao.compraJogos(jogo1); //15
 		
+		maria.registraJogada(jogo1, 10, true);
+		
+		assertEquals(1, jogo1.getVezesZeradas());
+		
+		maria.registraJogada(jogo1, 10, true);
+		
+		assertEquals(2, jogo1.getVezesZeradas());
 		assertEquals(10, maria.calculaX2p(jogo1));
 		assertEquals(1015, joao.calculaX2p(jogo1));
 		
@@ -62,6 +69,9 @@ public class TesteUsuario {
 		assertTrue(maria.existeJogo(jogo2));
 		assertFalse(kleber.existeJogo(jogo1));
 	}
+	
+
+	
 	
 	@Test
 	public void testUsuario(){
