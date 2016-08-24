@@ -8,7 +8,7 @@ package jogo;
  *
  */
 public class Luta extends Jogo{
-	private int BONUS;
+	private final int BONUS = super.getMaiorScore() / 1000;
 
 	/**
 	 * Construtor do jogo tipo luta
@@ -27,7 +27,6 @@ public class Luta extends Jogo{
 	 */
 	@Override
 	int bonusX2p() {
-		BONUS = super.getMaiorScore() / 1000;
 		return BONUS;
 	}
 	

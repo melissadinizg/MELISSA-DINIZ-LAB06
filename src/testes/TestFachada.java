@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import jogo.Fachada;
+import jogo.Jogo;
+import jogo.RPG;
 import usuario.Noob;
 import usuario.Usuario;
 import usuario.Veterano;
@@ -20,29 +22,51 @@ import usuario.Veterano;
 public class TestFachada {
 	private Fachada loja = new Fachada();
 	private Usuario user1, user2, user3;
+	private Jogo jogo1;
 	
-	@Before
-<<<<<<< HEAD
-    public void criaUsuario() throws Exception {
-=======
-    public void criaJogos() throws Exception {
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
-        user1 = new Noob("Melissa", "mel123", 50.0);
-        user2 = new Veterano("Luan", "lulu", 1000.0);
-    }
-	
-<<<<<<< HEAD
 	/**
-	 * Faz o teste da adicao de usuarios na lista de usuarios
+	 * Cria os usuarios e o jogo
+	 * @throws Exception
+	 */
+	@Before
+	public void criaUsuario() throws Exception {
+		user1 = new Noob("Melissa", "mel123", 50.0);
+		user2 = new Veterano("Luan", "lulu", 1000.0);
+        jogo1 = new RPG("Kingdom Hearts", 15.0);
+
+	}
+	
+	/**
+	 * Testa a adicao de dinheiro 
 	 * @throws Exception
 	 */
 	@Test
-	public void testAdicionaUsuario() throws Exception{
+	public void testAddDinheiro() throws Exception{
+		assertEquals(true, user1.adicionaDinheiro(10.0));
 		
+		assertEquals(60.0, user1.getDinheiro(), 0.001);
+		
+		//nao add valor negativo
+		try {
+			user2.adicionaDinheiro(-10);
+			fail("Deve lancar excecao.");
+		} catch (Exception e) {
+			assertEquals("Valor precisa ser maior que zero.", e.getMessage());
+		}
+	}
+
+	/**
+	 * Faz o teste da adicao de usuarios na lista de usuarios
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testAdicionaUsuario() throws Exception {
+
 		assertEquals(true, loja.addUsuario(user1));
 		assertEquals(true, loja.addUsuario(user2));
 		assertEquals(2, loja.getLoja().size());
-		
+
 		try {
 			loja.addUsuario(user1);
 			fail("Deveria lancar excecao.");
@@ -52,39 +76,28 @@ public class TestFachada {
 		}
 	}
 	
-	@Test
-	public void testUpgrade() throws Exception{
-		user3 = new Noob("Noobinho", "souNoob", 1.0);
 	
-=======
+	/**
+	 * testa o upgrade do usuario
+	 * @throws Exception
+	 */
 	@Test
-	public void testAdicionaUsuario(){
-		assertEquals(true, loja.addUsuario(user1));
-		assertEquals(false, loja.addUsuario(user1));
-		
-		
-	}
-	@Test
-	public void testUpgrade() throws Exception{
+	public void testUpgrade() throws Exception {
 		user3 = new Noob("Noobinho", "souNoob", 1.0);
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
+		//atualiza o valor do x2p
 		user3.setX2p(1100);
+		//add o user na lista
 		loja.addUsuario(user3);
-		
+
 		assertEquals(1100, user3.getX2p());
-<<<<<<< HEAD
+		//faz o upgrade do usuario
 		loja.upgrade("souNoob");
 		
-		//nao ta fazendo o cast
-		assertEquals("Veterano", user3.getClass().getSimpleName());
+		//o user recebe o novo usuario
+		user3 = loja.retornaUser("souNoob");
 		
+		assertEquals("Veterano", user3.getClass().getSimpleName());
 
 	}
-	
-=======
-		assertEquals(true, loja.upgrade("souNoob"));
-	}
-	
-	
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
+
 }

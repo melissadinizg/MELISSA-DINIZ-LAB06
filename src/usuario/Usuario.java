@@ -9,15 +9,6 @@ import jogo.Jogo;
 import testException.TestUsuario;
 
 /**
- * @author melissadg
- *
- */
-
-import java.util.ArrayList;
-import jogo.Jogo;
-import testException.TestUsuario;
-
-/**
  * @author Melissa Diniz - 115211394
  *
  */
@@ -48,8 +39,6 @@ public abstract class Usuario {
 	}
 
 
-	
-	
 	/**
 	 * Metodo que realiza a compra dos jogos
 	 * 
@@ -133,12 +122,15 @@ public abstract class Usuario {
 		}
 	}
 	
+	/**
+	 * Retorna o usuario como string
+	 */
 	@Override
 	public String toString() {
 		return this.getLogin() +"\n" + this.getNomeUsuario() + " - " + "Jogador" + this.getClass().getSimpleName() + "\n"; 
 	}
 
-	/**
+	/**Recupera o nome do usuario
 	 * @return the nomeUsuario
 	 */
 	public String getNomeUsuario() {
@@ -146,7 +138,7 @@ public abstract class Usuario {
 	}
 
 
-	/**
+	/**Altera o nome 
 	 * @param nomeUsuario the nomeUsuario to set
 	 */
 	public void setNomeUsuario(String nomeUsuario) {
@@ -154,7 +146,7 @@ public abstract class Usuario {
 	}
 
 
-	/**
+	/**Recupera login
 	 * @return the login
 	 */
 	public String getLogin() {
@@ -162,7 +154,7 @@ public abstract class Usuario {
 	}
 
 
-	/**
+	/**Altera login
 	 * @param login the login to set
 	 */
 	public void setLogin(String login) {
@@ -170,7 +162,7 @@ public abstract class Usuario {
 	}
 
 
-	/**
+	/**Recupera o valor do dinheiro
 	 * @return the dinheiro
 	 */
 	public double getDinheiro() {
@@ -178,7 +170,7 @@ public abstract class Usuario {
 	}
 
 
-	/**
+	/**Atualiza o dinheiro
 	 * @param dinheiro the dinheiro to set
 	 */
 	public void setDinheiro(double dinheiro) {
@@ -200,14 +192,14 @@ public abstract class Usuario {
 		this.listaJogos = listaJogos;
 	}
 
-	/**
+	/**Recupera o x2p
 	 * @return the x2p
 	 */
 	public int getX2p() {
 		return x2p;
 	}
 
-	/**
+	/**Atualiza o x2p
 	 * @param x2p the x2p to set
 	 */
 	public void setX2p(int x2pNovo) {
@@ -220,6 +212,37 @@ public abstract class Usuario {
 	 */
 	private void mudaX2p(int x2pNovo){
 		this.x2p = x2pNovo;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+
+	/**
+	 * Dois usuarios sao iguais se o login for igual
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Usuario)) {
+			return false;
+		}
+		Usuario outro = (Usuario) obj;
+
+		if (outro.getLogin() == this.getLogin()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

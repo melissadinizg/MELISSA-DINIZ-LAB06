@@ -1,10 +1,9 @@
-/**
- * Certo
- */
+//esse mesmo
 package jogo;
 
 import java.util.ArrayList;
 import jogo.Jogo;
+import testException.TestUsuario;
 import usuario.Usuario;
 import usuario.Veterano;
 
@@ -13,9 +12,14 @@ import usuario.Veterano;
  *
  */
 public class Fachada {
+	//atributos de fachada
 	private ArrayList<Usuario> loja;
 	private Usuario user;
 
+	/**
+	 * Construtor de fachada
+	 * inicializa o array 
+	 */
 	public Fachada() {
 		loja = new ArrayList<>();
 	}
@@ -27,47 +31,37 @@ public class Fachada {
 	 * @return
 	 * @throws Exception
 	 */
-	
-<<<<<<< HEAD
 	public void upgrade(String login) throws Exception {
-		Usuario user;
+		Usuario user, userNovo;
+
+		// se o usuario existir na lista
 		if (buscaUserLogin(login)) {
-			
+
 			user = retornaUser(login);
-			
- 			if ((user.getX2p() >= 1000) && (user.getClass() != Veterano.class)){
- 				
- 			// pegando os dados do usuario noob
+			// verifica se x2p > 1000 e se ja eh veterano
+			if ((user.getX2p() >= 1000) && (user.getClass() != Veterano.class)) {
+
+				// pegando os dados do usuario noob
 				int x2pNovo = user.getX2p();
 				String nomeUser = user.getNomeUsuario();
 				String loginUser = user.getLogin();
 				double dinheiro = user.getDinheiro();
-=======
-	public boolean upgrade(String login) throws Exception {
 
-		Usuario user = retornaUser(login);
-
-		//se for true o user ja existe na lista com o login dado
-		if (buscaUserLogin(login) && user.getX2p() >= 1000) {
-			// verifica se eh veterano
-			if (user.getClass() != Veterano.class) {
-
-				// pegando os dados do usuario noob
-				int x2pNovo = this.user.getX2p();
-				String nomeUser = this.user.getNomeUsuario();
-				String loginUser = this.user.getLogin();
-				double dinheiro = this.user.getDinheiro();
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
-
-				this.user = new Veterano(nomeUser, loginUser, dinheiro);
-				this.user.setX2p(x2pNovo);
+				// remove o usuario noob da lista
+				loja.remove(user);
+				// cria o novo usuario veterano
+				userNovo = new Veterano(nomeUser, loginUser, dinheiro);
+				// adiciona na lista
+				loja.add(userNovo);
+				// faz set no x2p do novo usuario
+				userNovo.setX2p(x2pNovo);
 			}
-		}else{
+		} else {
 			throw new Exception("Usuario nao esta na lista de usuarios.");
 		}
 
 	}
-	
+
 	/**
 	 * Busca o usuario na loja atraves do login
 	 * 
@@ -75,9 +69,11 @@ public class Fachada {
 	 * @return boolean
 	 * @throws Exception
 	 */
-	private boolean buscaUserLogin(String login) {
-		//retorna true se existir o usuario
-		//com esse login
+	private boolean buscaUserLogin(String login) throws Exception{
+		TestUsuario.testaLogin(login);
+		
+		// retorna true se existir o usuario
+		// com esse login
 		for (Usuario usuario : loja) {
 			if (usuario.getLogin().equalsIgnoreCase(login)) {
 				return true;
@@ -85,64 +81,42 @@ public class Fachada {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Retorna o usuario com um login passado
 	 * 
 	 * @param login
 	 * @return Usuarou/null
 	 */
-	private Usuario retornaUser(String login) {
+	public Usuario retornaUser(String login) {
 		Usuario user = null;
-		
+
 		for (Usuario usuario : loja) {
 			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				//se o usuario estiver na lista retorna o proprio usuario
+				// se o usuario estiver na lista retorna o proprio usuario
 				user = usuario;
 			}
 		}
-		//ou retorna null se nao existir o usuario
+		// ou retorna null se nao existir o usuario
 		return user;
-	}
-
-	
-	/**
-	 * Retorna o usuario com um login passado
-	 * 
-	 * @param login
-	 * @return Usuarou/null
-	 */
-	private Usuario retornaUser(String login) {
-		for (Usuario usuario : loja) {
-			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				//se o usuario estiver na lista retorna o proprio usuario
-				return usuario;
-			}
-		}
-		//ou retorna null se nao existir o usuario
-		return null;
 	}
 
 	/**
 	 * Adiciona o usuario a lista se ele ainda nao for cadastrado
+	 * 
 	 * @param user
 	 * @return boolean
 	 */
-<<<<<<< HEAD
-	public boolean addUsuario(Usuario user) throws Exception{
-=======
-	public boolean addUsuario(Usuario user) {
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
-		//se o usuario existir na lista ele retorna true
-		if (! loja.contains(user)) {
+	public boolean addUsuario(Usuario user) throws Exception {
+
+		// se o usuario existir na lista ele retorna true
+		if (!loja.contains(user)) {
 			loja.add(user);
 			return true;
-		}else{
+		} else {
 			throw new Exception("Usuario ja esta na lista de usuarios.");
 		}
 	}
-
-
 
 	/**
 	 * Adiciona dinheiro na conta do usuario usando o login passado no parametro
@@ -168,7 +142,7 @@ public class Fachada {
 	 * @throws Exception
 	 */
 	public void vendeJogo(Jogo jogo) throws Exception {
-		//faz a venda do jogo
+		// faz a venda do jogo
 		if (jogo != null) {
 			user.compraJogos(jogo);
 		} else {
@@ -176,62 +150,36 @@ public class Fachada {
 		}
 	}
 
-
-<<<<<<< HEAD
-
-=======
-
-
 	/**
-	 * Busca o usuario na loja atraves do login
-	 * 
-	 * @param login
-	 * @return boolean
-	 * @throws Exception
-	 */
-	private boolean buscaUserLogin(String login) {
-		//retorna true se existir o usuario
-		//com esse login
-		for (Usuario usuario : loja) {
-			if (usuario.getLogin().equalsIgnoreCase(login)) {
-				return true;
-			}
-		}
-		return false;
-	}
->>>>>>> 783eed9cf6143c9059cf0e0f046afc4a44d35f5e
-
-	/**
-	 * Sobreescrita do metodo toString 
-	 * retorna o objeto como string
+	 * Sobreescrita do metodo toString retorna o objeto como string
 	 */
 	@Override
 	public String toString() {
 		StringBuilder retorno = new StringBuilder("=== Central P2-CG ===\n");
 		double precoTotal = 0.0;
 
-		//percorre a lista de usuario e usando o toString adiciona  na string
+		// percorre a lista de usuario e usando o toString adiciona na string
 		for (Usuario usuario : loja) {
 
 			retorno.append(usuario.toString());
 			retorno.append("Lista de Jogos: \n");
 
-			//percorre a lista de jogos e usando o toString adiciona  na string
+			// percorre a lista de jogos e usando o toString adiciona na string
 			for (Jogo jogo : usuario.getListaJogos()) {
-				//atualiza o valor de preco total
+				// atualiza o valor de preco total
 				precoTotal = precoTotal + jogo.getPreco();
 				retorno.append(usuario.toString());
 
 			}
-			//armazena na string o total de preco dos jogos
+			// armazena na string o total de preco dos jogos
 			retorno.append("\nTotal de preço dos jogos: R$ " + precoTotal + "\n");
 			retorno.append("\n--------------------------------------------");
 
 		}
-		//retorna a toString retorno com todos as string adicionada
+		// retorna a toString retorno com todos as string adicionada
 		return retorno.toString();
 	}
-	
+
 	/**
 	 * @return the loja
 	 */
